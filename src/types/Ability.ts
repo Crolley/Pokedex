@@ -1,3 +1,3 @@
 export type Ability = {
-  name : string 
-}
+  name: string;
+};

@@ -18,7 +18,7 @@ export type PokemonType =
   | "steel"
   | "fairy";
 
-  export type TypeColor = {
-  name : PokemonType;
+export type TypeColor = {
+  name: PokemonType;
   color: string;
-  };
+};
