@@ -11,10 +11,13 @@ import { Pokemon } from "../types/Pokemon";
 
 import { mapToPokemon } from "@/Service/PokeMapping";
 
+import Loader from "../components/Loader";
+
 export default function Home() {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string>("");
+  const [showLoader, setShowLoader] = useState(true);
 
   // Pour l'instant on charge les 12 premiers
   const loadInitial = async () => {
@@ -25,12 +28,12 @@ export default function Home() {
           const pokemon = await fetchPokemonById(id);
           const species = await fetchPokemonSpecies(id);
           const evolutionChain = await fetchEvolutionChain(
-            species.evolution_chain.url,
+            species.evolution_chain.url
           );
 
           // mappe vers notre type clean
           return mapToPokemon(pokemon, species, evolutionChain);
-        }),
+        })
       );
 
       setPokemons(entries);
@@ -45,21 +48,33 @@ export default function Home() {
     loadInitial();
   }, []);
 
-  if (loading) return <p className="p-4">Chargement des Pokémon…</p>;
-  if (error) return <p className="p-4 text-red-500">Erreur : {error}</p>;
-
   return (
-    <div className="min-h-screen bg-[#f6f8fc] py-6">
-      <div className="mx-auto px-6 sm:px-6 lg:px-8 2xl:px-16">
-        <h1 className="text-3xl font-bold mb-4">Pokédex</h1>
-        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-12 gap-x-6">
-          {pokemons.map((p) => (
-            <div key={p.id} className="w-full">
-              <PokemonCard pokemon={p} />
+    <div>
+      {/* Loader plein écran */}
+      {showLoader && (
+        <Loader loading={loading} onExited={() => setShowLoader(false)} />
+      )}
+
+      {/* Affiche l’erreur si besoin (après loading) */}
+      {!loading && error && (
+        <p className="p-4 text-red-500">Erreur : {error}</p>
+      )}
+
+      {/* Contenu principal (quand c’est chargé et sans erreur) */}
+      {!loading && !error && (
+        <div className="min-h-screen bg-[#f6f8fc] py-6">
+          <div className="mx-auto max-w-screen-xl px-6 sm:px-6 lg:px-8 2xl:px-16">
+            <h1 className="text-3xl font-bold mb-4">Pokédex</h1>
+            <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-12 gap-x-6">
+              {pokemons.map((p) => (
+                <div key={p.id} className="w-full">
+                  <PokemonCard pokemon={p} />
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

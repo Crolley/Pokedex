@@ -1,7 +1,7 @@
 // src/components/Loader.tsx
 import React, { useEffect, useState } from "react";
 
-import ectoGif from "../assets/Ectoplasma.gif"; // ou le chemin où tu as mis ton GIF
+import ectoGif from "../assets/ectoplasma.gif";
 
 interface LoaderProps {
   loading: boolean;
@@ -13,25 +13,30 @@ const Loader: React.FC<LoaderProps> = ({ loading, onExited }) => {
 
   useEffect(() => {
     if (!loading) {
-      setExiting(true);
-      const timer = setTimeout(onExited, 700);
+      // 2 s d’affichage, puis on déclenche la fermeture du cercle
+      const waitTimer = setTimeout(() => {
+        setExiting(true);
+        // après la transition (700 ms), on retire du DOM
+        const exitTimer = setTimeout(onExited, 700);
+        return () => clearTimeout(exitTimer);
+      }, 2000);
 
-      return () => clearTimeout(timer);
+      return () => clearTimeout(waitTimer);
     }
   }, [loading, onExited]);
 
   return (
     <div
-      className={`
-        fixed inset-0 z-50 flex items-center justify-center
-        bg-[#505070] text-white
-        transform transition-transform duration-000
-        ${exiting ? "translate-y-full" : "translate-y-0"}
-      `}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-[#505070]"
+      style={{
+        // clip-path passe de 150% à 0%
+        clipPath: exiting ? "circle(0% at 50% 50%)" : "circle(150% at 50% 50%)",
+        transition: "clip-path 700ms ease-in-out",
+      }}
     >
-      {/* Remplace le spinner par ton GIF */}
       <img
         alt="Chargement…"
+        className="max-w-full max-h-screen object-contain"
         src={ectoGif}
       />
     </div>
