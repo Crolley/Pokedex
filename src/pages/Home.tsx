@@ -1,14 +1,15 @@
 // src/pages/Home.tsx
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+
 import {
   fetchPokemonById,
-  fetchPokemonByName,
   fetchPokemonSpecies,
   fetchEvolutionChain,
 } from "../Service/Api/PokeApi";
-import { mapToPokemon } from "@/Service/PokeMapping";
 import PokemonCard from "../components/PokemonCard";
 import { Pokemon } from "../types/Pokemon";
+
+import { mapToPokemon } from "@/Service/PokeMapping";
 
 export default function Home() {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
@@ -24,12 +25,14 @@ export default function Home() {
           const pokemon = await fetchPokemonById(id);
           const species = await fetchPokemonSpecies(id);
           const evolutionChain = await fetchEvolutionChain(
-            species.evolution_chain.url
+            species.evolution_chain.url,
           );
+
           // mappe vers notre type clean
           return mapToPokemon(pokemon, species, evolutionChain);
-        })
+        }),
       );
+
       setPokemons(entries);
     } catch (e: any) {
       setError(e.message);
@@ -51,7 +54,7 @@ export default function Home() {
         <h1 className="text-3xl font-bold mb-4">Pokédex</h1>
         <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-12 gap-x-6">
           {pokemons.map((p) => (
-            <div className="w-full" key={p.id}>
+            <div key={p.id} className="w-full">
               <PokemonCard pokemon={p} />
             </div>
           ))}

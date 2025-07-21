@@ -39,7 +39,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => (
     `}
   >
     <CardHeader className="absolute left-1/2 -translate-x-1/2 -mt-14 flex justify-center">
-      <Image src={pokemon.sprite} alt={pokemon.name} className="h-20 w-20" />
+      <Image alt={pokemon.name} className="h-20 w-20" src={pokemon.sprite} />
     </CardHeader>
 
     <CardBody className="pt-10 pb-4 px-4 space-y-1 text-center">
