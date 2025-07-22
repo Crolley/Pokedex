@@ -18,8 +18,9 @@ const Loader: React.FC<LoaderProps> = ({ loading, onExited }) => {
         setExiting(true);
         // après la transition (700 ms), on retire du DOM
         const exitTimer = setTimeout(onExited, 700);
+
         return () => clearTimeout(exitTimer);
-      }, 2000);
+      }, 1500);
 
       return () => clearTimeout(waitTimer);
     }

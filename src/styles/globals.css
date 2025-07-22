@@ -9,3 +9,19 @@
     font-family: "Outfit", sans-serif;
   }
 }
+
+/* styles/globals.css */
+html,
+body,
+.select-none {
+  /* Empêche la sélection de texte partout */
+  -webkit-user-select: none; /* Chrome/Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+  user-select: none; /* Standard */
+}
+
+/* En plus, pour retirer le “flash” bleu sur mobile lorsque tu tapes */
+* {
+  -webkit-tap-highlight-color: transparent;
+}

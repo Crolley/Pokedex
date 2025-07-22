@@ -8,7 +8,7 @@ import capitalize from "@/utils/Capitalize";
 function mapToPokemon(
   pokemon: any,
   species: any,
-  evolutionChain: any,
+  evolutionChain: any
 ): Pokemon {
   return {
     id: pokemon.id,
@@ -25,7 +25,7 @@ function mapToPokemon(
       (s: any): Stat => ({
         name: statKeyMap[s.stat.name],
         value: s.base_stat,
-      }),
+      })
     ),
     evolution: mapEvolutionChain(evolutionChain),
   };
@@ -42,7 +42,7 @@ const statKeyMap: Record<string, PokemonStat> = {
 
 function extractDescription(species: any): string {
   const entry = species.flavor_text_entries.find(
-    (e: any) => e.language.name === "fr",
+    (e: any) => e.language.name === "fr"
   );
 
   return entry?.flavor_text.replace(/\f/g, " ") ?? "No description available.";

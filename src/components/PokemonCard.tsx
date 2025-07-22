@@ -32,19 +32,37 @@ const typeColorMap: Record<string, string> = {
 const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => (
   <Card
     className={`
-      relative
-      w-full
-      bg-white rounded-3xl shadow-md
-      overflow-visible text-center
-    `}
+    relative
+    group                     
+    w-full
+    bg-white rounded-2xl
+    overflow-visible text-center
+
+    border-2 border-transparent
+    hover:border-[#c2c2c2]
+    transition-colors duration-300 
+
+    shadow-sm hover:shadow-md
+  `}
   >
-    <CardHeader className="absolute left-1/2 -translate-x-1/2 -mt-14 flex justify-center">
-      <Image alt={pokemon.name} className="h-20 w-20" src={pokemon.sprite} />
+    <CardHeader className="absolute left-1/2 -translate-x-1/2 -mt-16 flex justify-center">
+      <Image
+        alt={pokemon.name}
+        className="
+          h-30 w-30
+          group-hover:scale-110  
+        "
+        src={pokemon.sprite}
+      />
     </CardHeader>
 
-    <CardBody className="pt-10 pb-4 px-4 space-y-1 text-center">
-      <p className="text-ms text-[#8f9396]">N°{pokemon.id}</p>
-      <h3 className="text-lg font-semibold capitalize">{pokemon.name}</h3>
+    <CardBody className="pt-8 pb-4 px-4 text-center">
+      <p className="text-xs relative top-3 text-[#8f9396] font-bold ">
+        N°{pokemon.id}
+      </p>
+      <h3 className="relative text-lg top-3 font-semibold capitalize font-bold ">
+        {pokemon.name}
+      </h3>
     </CardBody>
 
     <CardFooter className="pb-4 flex justify-center space-x-2">

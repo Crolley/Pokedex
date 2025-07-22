@@ -50,17 +50,14 @@ export default function Home() {
 
   return (
     <div>
-      {/* Loader plein écran */}
       {showLoader && (
         <Loader loading={loading} onExited={() => setShowLoader(false)} />
       )}
 
-      {/* Affiche l’erreur si besoin (après loading) */}
       {!loading && error && (
         <p className="p-4 text-red-500">Erreur : {error}</p>
       )}
 
-      {/* Contenu principal (quand c’est chargé et sans erreur) */}
       {!loading && !error && (
         <div className="min-h-screen bg-[#f6f8fc] py-6">
           <div className="mx-auto max-w-screen-xl px-6 sm:px-6 lg:px-8 2xl:px-16">
