@@ -32,18 +32,19 @@ const typeColorMap: Record<string, string> = {
 const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => (
   <Card
     className={`
-    relative
-    group                     
-    w-full
-    bg-white rounded-2xl
-    overflow-visible text-center
-
-    border-2 border-transparent
-    hover:border-[#c2c2c2]
-    transition-colors duration-300 
-
-    shadow-sm hover:shadow-md
-  `}
+      relative group w-full
+      bg-[#f6f8fc]           /* fond clair neumorphique */
+      rounded-2xl
+      overflow-visible text-center
+      transition-transform duration-300
+      hover:scale-[1.02]
+    `}
+    style={{
+      boxShadow: `
+        -8px -8px 12px rgba(255, 255, 255, 0.8),
+         8px  8px 12px rgba(0, 0, 0, 0.1)
+      `,
+    }}
   >
     <CardHeader className="absolute left-1/2 -translate-x-1/2 -mt-16 flex justify-center">
       <Image
