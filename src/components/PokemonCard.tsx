@@ -35,9 +35,8 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => (
       relative group w-full
       bg-[#f6f8fc]           /* fond clair neumorphique */
       rounded-2xl
-      overflow-visible text-center
-      transition-transform duration-300
-      hover:scale-[1.02]
+      overflow-visible       /* laisse l’image sortir */
+      text-center
     `}
     style={{
       boxShadow: `
@@ -46,33 +45,42 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => (
       `,
     }}
   >
-    <CardHeader className="absolute left-1/2 -translate-x-1/2 -mt-16 flex justify-center">
-      <Image
-        alt={pokemon.name}
+
+    <CardHeader className="
+        absolute left-1/2 -translate-x-1/2 -mt-16 
+        flex justify-center
+        pointer-events-none
+      ">
+      <div
         className="
-          h-30 w-30
-          group-hover:scale-110  
+          transform transition-transform duration-100
+          group-hover:scale-125   /* seul l’enfant s’agrandit */
+          pointer-events-none
         "
-        src={pokemon.sprite}
-      />
+      >
+        <Image
+          alt={pokemon.name}
+          src={pokemon.sprite}
+        />
+      </div>
     </CardHeader>
 
     <CardBody className="pt-8 pb-4 px-4 text-center">
-      <p className="text-xs relative top-3 text-[#8f9396] font-bold ">
-        N°{pokemon.id}
+      <p className="text-xs relative top-3 text-[#8f9396] font-bold">
+        N° {pokemon.id}
       </p>
-      <h3 className="relative text-lg top-3 font-semibold capitalize font-bold ">
+      <h3 className="relative text-lg top-3 capitalize font-bold">
         {pokemon.name}
       </h3>
     </CardBody>
 
-    <CardFooter className="pb-4 flex justify-center space-x-2">
+    <CardFooter className="pb-4 flex justify-center space-x-3">
       {pokemon.types.map((t) => (
         <span
           key={t}
           className={`
-            inline-block px-4 py-1 rounded-md
-            ${typeColorMap[t]} text-[#333333] text-sm font-medium
+            inline-block px-3 py-px rounded-md
+            ${typeColorMap[t]} text-[#333333] text-base font-bold
           `}
         >
           {t[0].toUpperCase() + t.slice(1)}

@@ -1,30 +1,52 @@
 // src/components/SearchBar.tsx
-import React, { ChangeEvent } from "react";
-import SP from "../assets/SP.png"; // adapte le chemin si besoin
+import React, { ChangeEvent, useState, useEffect } from "react";
+import SP from "../assets/SP.png";
 
 interface SearchBarProps {
   value: string;
   onChange: (newValue: string) => void;
   placeholder?: string;
   className?: string;
+  debounceTime?: number;  
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({
   value,
   onChange,
-  placeholder = "Rechercher…",
+  placeholder = "Rechercher un Pokémon…",
   className = "",
+  debounceTime = 300,      // délai 
 }) => {
+  const [localValue, setLocalValue] = useState(value);
+
+  useEffect(() => {
+    setLocalValue(value);
+  }, [value]);
+
+  useEffect(() => {
+    // Si la valeur est vide, pas de timer
+    if (localValue === "") {
+      if (value !== "") {
+        onChange("");
+      }
+      return;
+    }
+
+    const handle = setTimeout(() => {
+      if (localValue !== value) {
+        onChange(localValue);
+      }
+    }, debounceTime);
+
+    return () => clearTimeout(handle);
+  }, [localValue, debounceTime, onChange, value]);
   return (
     <div
       className={`
         relative w-full
-        max-w-md          
-        sm:max-w-lg       
-        md:max-w-xl       
-        lg:max-w-2xl      
-        xl:max-w-2xl      
+        max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-2xl
         mx-auto
+        ${className}
       `}
     >
       <img
@@ -34,14 +56,13 @@ const SearchBar: React.FC<SearchBarProps> = ({
       />
       <input
         type="text"
-        value={value}
+        value={localValue}
         onChange={(e: ChangeEvent<HTMLInputElement>) =>
-          onChange(e.target.value)
+          setLocalValue(e.target.value)
         }
         placeholder={placeholder}
         className={`
-          w-full
-          pl-12 pr-4 py-2
+          w-full pl-12 pr-4 py-2
           border border-gray-300 rounded-lg
           focus:outline-none focus:ring-2 focus:ring-blue-300
           transition

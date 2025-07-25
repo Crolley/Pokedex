@@ -42,7 +42,7 @@ const statKeyMap: Record<string, PokemonStat> = {
 
 function extractDescription(species: any): string {
   const entry = species.flavor_text_entries.find(
-    (e: any) => e.language.name === "fr"
+    (e: any) => e.language.name === "en"
   );
 
   return entry?.flavor_text.replace(/\f/g, " ") ?? "No description available.";

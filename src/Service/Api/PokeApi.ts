@@ -8,19 +8,18 @@ export async function fetchAllPokemon(): Promise<any[]> {
   const data = await res.json();
   return data.results;
 }
-
+// Fetch toutes les species de Pokémon
+export async function fetchAllPokemonSpecies(): Promise<{ name: string; url: string }[]> {
+  const res = await fetch(`${API_BASE}/pokemon-species?limit=10000`);
+  if (!res.ok) throw new Error("Erreur lors de la récupération des Pokémon (species)");
+  const data = await res.json();
+  return data.results;
+}
 // Fetch un Pokémon par son ID
 export async function fetchPokemonById(id: number): Promise<any> {
   const res = await fetch(`${API_BASE}/pokemon/${id}`);
   if (!res.ok)
     throw new Error(`Erreur lors de la récupération du Pokémon ${id}`);
-  return res.json();
-}
-
-// Fetch un Pokémon par son nom
-export async function fetchPokemonByName(name: string): Promise<any> {
-  const res = await fetch(`${API_BASE}/pokemon/${name.toLowerCase()}`);
-  if (!res.ok) throw new Error(`Pokémon "${name}" introuvable`);
   return res.json();
 }
 
