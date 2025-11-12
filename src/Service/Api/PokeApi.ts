@@ -3,7 +3,7 @@ const API_BASE = "https://pokeapi.co/api/v2";
 
 // Fetch tous les Pokémon
 export async function fetchAllPokemon(): Promise<any[]> {
-  const res = await fetch(`${API_BASE}/pokemon?limit=10000`);
+  const res = await fetch(`${API_BASE}/pokemon?limit=1025`);
   if (!res.ok) throw new Error("Erreur lors de la récupération des Pokémon");
   const data = await res.json();
   return data.results;

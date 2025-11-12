@@ -1,6 +1,6 @@
 // src/components/SearchBar.tsx
 import React, { ChangeEvent } from "react";
-import SP from "../assets/SP.png"; // adapte le chemin si besoin
+import SP from "../assets/SP.png";
 
 interface SearchBarProps {
   value: string;
@@ -19,11 +19,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
     <div
       className={`
         relative w-full
-        max-w-md          
-        sm:max-w-lg       
-        md:max-w-xl       
-        lg:max-w-2xl      
-        xl:max-w-2xl      
+        max-w-6xl
         mx-auto
       `}
     >
@@ -41,7 +37,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
         placeholder={placeholder}
         className={`
           w-full
-          pl-12 pr-4 py-2
+          pl-12 py-3
           border border-gray-300 rounded-lg
           focus:outline-none focus:ring-2 focus:ring-blue-300
           transition

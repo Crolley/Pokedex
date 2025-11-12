@@ -3,7 +3,7 @@ import { PokemonType } from "../types/Type";
 import { Evolution } from "../types/Evolution";
 import { PokemonStat, Stat } from "../types/Stat";
 
-import capitalize from "@/utils/Capitalize";
+import capitalize from "../utils/Capitalize";
 
 function mapToPokemon(
   pokemon: any,
