@@ -25,7 +25,7 @@ export default function Home() {
   const loadInitial = async () => {
     try {
       const entries = await Promise.all(
-        Array.from({ length: 1025 }, (_, i) => i + 1).map(async (id) => {
+        Array.from({ length: 600 }, (_, i) => i + 1).map(async (id) => {
           // on récupère chaque bloc brut de données
           const pokemon = await fetchPokemonById(id);
           const species = await fetchPokemonSpecies(id);
