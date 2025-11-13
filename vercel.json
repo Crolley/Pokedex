@@ -1,3 +1,9 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
+  "rewrites": [{ "source": "/(.*)", "destination": "/" }],
+  "installCommand": "pnpm install --registry=https://registry.npmjs.org/",
+  "buildCommand": "pnpm install --registry=https://registry.npmjs.org/ && pnpm run build",
+  "env": {
+    "NPM_CONFIG_REGISTRY": "https://registry.npmjs.org/",
+    "PNPM_REGISTRY": "https://registry.npmjs.org/"
+  }
 }
