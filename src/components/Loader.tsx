@@ -1,7 +1,7 @@
 // src/components/Loader.tsx
 import React, { useEffect, useState } from "react";
 
-import ectoGif from "../assets/ectoplasma.gif";
+import ectoGif from "../assets/Ectoplasma.gif";
 
 interface LoaderProps {
   loading: boolean;
