@@ -13,7 +13,6 @@ const SearchBar: React.FC<SearchBarProps> = ({
   value,
   onChange,
   placeholder = "Rechercher…",
-  className = "",
 }) => {
   return (
     <div
